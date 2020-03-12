@@ -164,22 +164,20 @@ class User(db.Model):
     def is_below_tier(self, tier):
         current_tier = self.get_tier()
 
-        if current_tier == "Platinum":
-            return False
+        ranking = {
+            "Carbon": 0,
+            "Bronze": 1,
+            "Silver": 2,
+            "Gold": 3,
+            "Platinum": 4,
+        }
 
-        if current_tier == "Gold" and tier == "Platinum":
-            return True
-
-        if current_tier == "Silver" and tier in ("Gold", "Platinum"):
-            return True
-
-        if current_tier == "Bronze" and tier in ("Silver", "Gold", "Platinum"):
-            return True
-
-        if current_tier == "Carbon" and tier in ("Bronze", "Silver", "Gold", "Platinum"):
-            return True
-
-        return False
+        # Note: technically this has slightly different functionality than the previous factoring,
+        # which would have silently returned False if either tier or current_tier were not one of the valid options
+        # This implementation will "fail fast" instead. I'd want to learn more about how this
+        # function is expected to be consumed before actually choosing between these implementations, and likely
+        # add more targeted error handling.
+        return ranking[current_tier] < ranking[tier]
 
     # These are for Flask Login --------
     #
