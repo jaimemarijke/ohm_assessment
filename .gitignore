@@ -1,0 +1,14 @@
+# Distribution / packaging
+*.egg-info/
+
+# venv
+ohm_venv/
+
+# .cnf files
+*.cnf
+
+# pycs
+*.pyc
+
+# build files of some kind
+public/webassets-external
