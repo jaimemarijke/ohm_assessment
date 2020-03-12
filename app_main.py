@@ -196,7 +196,7 @@ def after_request(response):
 def redirect_to_passthrough(url='/'):
     if 'passthrough' in session and session['passthrough'][0:5] != '/data' and \
             session['passthrough'][0:6] != '/popup' and \
-            session['passthrough'][0:10] != '/dashboard':
+            session['passthrough'][0:10] not in ['/dashboard', '/community']:
         passthrough = session['passthrough']
         session.pop('passthrough', None)
         return redirect(passthrough)
@@ -206,3 +206,4 @@ def redirect_to_passthrough(url='/'):
 
 
 import pages.dashboard
+import pages.community

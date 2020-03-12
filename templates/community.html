@@ -1,0 +1,53 @@
+{% extends "base_map.html" %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="/css/webflow_base.css">
+    <link rel="stylesheet" type="text/css" href="/css/page_base.css">
+    <style>
+        .recent-user-table table, th, td {
+            border: 1px black solid;
+            border-collapse: collapse;
+        }
+        .recent-user-table th, td {
+            padding: 15px;
+        }
+        .recent-user-table tr:nth-child(odd) {
+            background-color: white;
+        }
+        .recent-user-table tr:nth-child(even) {
+            background-color: lightgrey;
+        }
+    </style>
+
+{% endblock %}
+
+{% block body %}
+
+    <div id="container" class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="twothirds_div">
+                    <h1>Recent Users</h1>
+                    <div>
+                        <table class="recent-user-table">
+                        <tr>
+                            <th>Name</th>
+                            <th>Tier</th>
+                            <th>Points</th>
+                        </tr>
+                        {% for user in recent_users %}
+                        <tr>
+                           <td class="recent-user-table-name">{{user.display_name}}</td>
+                           <td class="recent-user-table-tier">{{user.tier}}</td>
+                            <td class="recent-user-table-points">{{user.point_balance}}</td>
+                        </tr>
+                        {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
